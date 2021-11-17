@@ -87,7 +87,7 @@
     <div class="form--steps-container">
         <div class="form--steps-counter">Krok <span>1</span>/4</div>
 
-        <form:form action="addDonation" method="post" modelAttribute="donation">
+        <form:form action="/addDonation" method="post" modelAttribute="donation">
             <!-- STEP 1: class .active is switching steps -->
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
@@ -120,16 +120,16 @@
                 </div>
             </div>
 
-
-
             <!-- STEP 3 -->
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-                <div class="form-group form-group--checkbox">
-                    <form:select id="institution" path="institution">
-                        <form:options items="${institutions}" itemLabel="name"/>
-                    </form:select>
+                <div>
+                    <c:forEach items="${institutions}" var="institution">
+                        <input type="radio" path="institution" name="institution" value="${institution.id}"/>
+                        <label for="${institution.id}">${institution.name}</label> <br>
+                    </c:forEach>
+
                 </div>
 
                 <div class="form-group form-group--buttons">
@@ -146,8 +146,9 @@
                     <div class="form-section--column">
                         <h4>Adres odbioru</h4>
 
+                        <div class="form-group form-group--inline">
                             Ulica: <form:input path="street" id="street" />
-
+                        </div>
 
                         <div class="form-group form-group--inline">
                             Miasto: <form:input path="city" id="city"/>

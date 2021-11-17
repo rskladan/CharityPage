@@ -5,6 +5,9 @@ import pl.coderslab.charity.category.Category;
 import pl.coderslab.charity.institution.Institution;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
@@ -18,7 +21,7 @@ public class Donation {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    quantity of bags with clothes/toys
+    @Min(1)
     private Integer quantity;
 
     @ManyToMany
@@ -27,11 +30,17 @@ public class Donation {
     @ManyToOne
     private Institution institution;
 
+    @Size(min = 2, message = "Street name too short")
     private String street;
-    private String city;
-    private String zipCode;
-    private LocalDate pickUpDate;
-    private LocalTime pickUpTime;
-    private String pickUpComment;
 
+    @Size(min = 2, message = "City name too short")
+    private String city;
+
+    @Size(min = 5, max = 6, message = "Wrong zip code")
+    private String zipCode;
+
+//    wrocic do LocalDate
+    private String pickUpDate;
+    private String pickUpTime;
+    private String pickUpComment;
 }

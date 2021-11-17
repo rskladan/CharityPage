@@ -97,8 +97,8 @@
                     </li>
                 </c:if>
 
-                <c:if test="${status.count == institutionList.size()} && ${status.count % 2 != 0}">
-                        <div>
+                <c:if test="${status.count == institutionList.size() && status.count % 2 != 0}">
+                        <div class="col" style="visibility: hidden">
                         </div>
                     </li>
                 </c:if>

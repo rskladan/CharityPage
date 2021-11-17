@@ -165,14 +165,14 @@ document.addEventListener("DOMContentLoaded", function() {
 
       var categories = [];
       var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-      var selectedInstitution = document.getElementById("institution");
+      var selectedInstitution = document.querySelector('input[type=radio]:checked');
 
       if(this.currentStep === 4) {
 
         console.log('****************************************************');
         console.log("Ilosc workow: " + document.querySelector('#quantity').value);
         console.log("Kategorie: " + categories);
-        console.log("Instytucja: " + selectedInstitution.options[selectedInstitution.selectedIndex].text);
+        console.log("Instytucja: " + selectedInstitution.value);
         console.log("Ulica: " + document.querySelector('#street').value);
         console.log("Miasto: " + document.querySelector('#city').value);
         console.log("Kod pocztowy: " + document.querySelector('#zipCode').value);
@@ -190,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
         document.querySelector("#quantity-result").innerHTML = "Worki: " + document.querySelector('#quantity').value;
         document.querySelector("#category-result").innerHTML = "Z kategorii: " + categories.join(", ");
-        document.querySelector("#institution-result").innerHTML = selectedInstitution.options[selectedInstitution.selectedIndex].text;
+        document.querySelector("#institution-result").innerHTML = selectedInstitution.value;
         document.querySelector("#street-result").innerHTML = document.querySelector('#street').value;
         document.querySelector("#city-result").innerHTML = document.querySelector('#city').value;
         document.querySelector("#zipCode-result").innerHTML = document.querySelector('#zipCode').value;

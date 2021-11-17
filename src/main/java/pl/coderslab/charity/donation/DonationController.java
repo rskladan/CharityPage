@@ -29,9 +29,11 @@ public class DonationController {
     }
 
     @PostMapping("/addDonation")
+    @ResponseBody
     public String getDonationDetails(@Valid Donation donation, BindingResult result){
         if(result.hasErrors()){
-            return "index";
+//            return "index";
+            return result.toString();
         } else {
             iDonationRepository.save(donation);
             return "form-confirmation";
