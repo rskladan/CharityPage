@@ -92,11 +92,20 @@
             <div data-step="1" class="active">
                 <h3>Zaznacz co chcesz oddać:</h3>
 
-                <div>
-                    <c:forEach items="${categories}" var="category">
-                       <input:checkbox path="categories" name="category" value="${category.id}" label="${category.name}"/> <br>
-                    </c:forEach>
-                </div>
+                <c:forEach items="${categories}" var="category">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input
+                                    type="checkbox"
+                                    name="categories"
+                                    value="${category.id}"
+                            />
+                            <span class="checkbox"></span>
+                            <span class="description">
+                                    ${category.name}</span>
+                        </label>
+                    </div>
+                </c:forEach>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn next-step">Dalej</button>
@@ -110,7 +119,7 @@
                 <div class="form-group form-group--inline">
                     <label>
                         Liczba 60l worków:
-                        <form:input path="quantity" step="1" min="1" type="number"/>
+                        <form:input path="quantity" step="1" min="1" type="number" id="quantityOfBags"/>
                     </label>
                 </div>
 
@@ -124,13 +133,21 @@
             <div data-step="3">
                 <h3>Wybierz organizacje, której chcesz pomóc:</h3>
 
-                <div>
-                    <c:forEach items="${institutions}" var="institution">
-                        <input type="radio" path="institution" name="institution" value="${institution.id}"/>
-                        <label for="${institution.id}">${institution.name}</label> <br>
-                    </c:forEach>
+                <c:forEach items="${institutions}" var="institution">
+                    <div class="form-group form-group--checkbox">
+                        <label>
+                            <input type="radio" name="institution" value="${institution.id}" />
+                            <span class="checkbox radio"></span>
+                            <span class="description">
+                                  <div class="title">${institution.name}</div>
+                                  <div class="subtitle">
+                                          ${institution.description}
+                                  </div>
+                            </span>
+                        </label>
+                    </div>
+                </c:forEach>
 
-                </div>
 
                 <div class="form-group form-group--buttons">
                     <button type="button" class="btn prev-step">Wstecz</button>
@@ -147,15 +164,15 @@
                         <h4>Adres odbioru</h4>
 
                         <div class="form-group form-group--inline">
-                            Ulica: <form:input path="street" id="street" />
+                           <label> Ulica: <form:input path="street" id="street" /> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            Miasto: <form:input path="city" id="city"/>
+                            <label> Miasto: <form:input path="city" id="city"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            Kod pocztowy: <form:input path="zipCode" id="zipCode"/>
+                            <label> Kod pocztowy: <form:input path="zipCode" id="zipCode"/> </label>
                         </div>
 
                     </div>
@@ -163,11 +180,11 @@
                     <div class="form-section--column">
                         <h4>Termin odbioru</h4>
                         <div class="form-group form-group--inline">
-                            Termin odbioru: <form:input type="date" path="pickUpDate" id="pickUpDate"/>
+                            <label> Termin odbioru: <form:input type="date" path="pickUpDate" id="pickUpDate"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
-                            Godzina odbioru: <form:input type="time" path="pickUpTime" id="pickUpTime"/>
+                            <label> Godzina odbioru: <form:input type="time" path="pickUpTime" id="pickUpTime"/> </label>
                         </div>
 
                         <div class="form-group form-group--inline">
@@ -193,16 +210,15 @@
                         <h4>Oddajesz:</h4>
                         <ul>
                             <li id="quantity-result">
-<%--                                <span class="icon icon-bag"></span>--%>
+                                <span class="icon icon-bag"></span>
                                 <span class="summary--text"></span>
                             </li>
                             <li id="category-result">
-<%--                                <span class="icon icon-bag"></span>--%>
-
+                                <span class="icon icon-bag"></span>
                                 <span class="summary--text"></span>
                             </li>
                             <li id="institution-result">
-<%--                                <span class="icon icon-hand"></span>--%>
+                                <span class="icon icon-hand"></span>
                                 <span class="summary--text">
                                 </span>
                             </li>

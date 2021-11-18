@@ -140,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
       });
 
       // Form submit
-      // this.$form.querySelector("form").addEventListener("submit", e => this.submit(e));
+      this.$form.querySelector("form").addEventListener("submit", e => this.submit(e));
     }
 
     /**
@@ -153,8 +153,6 @@ document.addEventListener("DOMContentLoaded", function() {
     updateForm() {
       this.$step.innerText = this.currentStep;
 
-      // TODO: Validation
-
       this.slides.forEach(slide => {
         slide.classList.remove("active");
 
@@ -163,16 +161,64 @@ document.addEventListener("DOMContentLoaded", function() {
         }
       });
 
-      var categories = [];
-      var checkboxes = document.querySelectorAll('input[type=checkbox]:checked')
-      var selectedInstitution = document.querySelector('input[type=radio]:checked');
+      // TODO: Validation
+
+      if(this.currentStep === 1) {
+        var categories = [];
+        var checkboxes = document.querySelectorAll('input[type=checkbox]:checked');
+        var nextButton = document.getElementsByClassName("btn next-step")[0];
+
+
+        nextButton.addEventListener('click', function(event) {
+
+        //  dodac walidacje checkboxow
+        });
+
+      }
+
+      if(this.currentStep === 2) {
+        var quantityOfBags = document.getElementById("quantityOfBags");
+        var nextButton = document.getElementsByClassName("btn next-step")[1];
+
+        if(quantityOfBags.value === "") {
+          nextButton.disabled = true;
+        }
+
+        quantityOfBags.addEventListener("change", function (e) {
+          if (quantityOfBags.value === "" || quantityOfBags.value <= 0) {
+            nextButton.disabled = true;
+            console.log("BLAD inputu")
+          } else {
+            console.log("Input spoko")
+            nextButton.disabled = false;
+          }
+        });
+      }
+
+      if(this.currentStep === 3) {
+
+        var selectedInstitution = document.querySelector('input[type=radio]:checked');
+        var nextButton = document.getElementsByClassName("btn next-step")[2];
+
+        if(selectedInstitution === null) {
+          nextButton.disabled = true;
+        } else {
+          nextButton.disabled = false;
+        }
+
+        document.body.addEventListener('change', function(e){
+          nextButton.disabled = false;
+        })
+      }
+
 
       if(this.currentStep === 4) {
-
+        var selectedInstitution = document.querySelector('input[type=radio]:checked').parentNode.children;
+        var selectedInstitutionName = selectedInstitution[2].firstElementChild.innerHTML;
         console.log('****************************************************');
         console.log("Ilosc workow: " + document.querySelector('#quantity').value);
-        console.log("Kategorie: " + categories);
-        console.log("Instytucja: " + selectedInstitution.value);
+        console.log("Ilość kategorii: " + checkboxes.length);
+        console.log("Instytucja: " + selectedInstitutionName);
         console.log("Ulica: " + document.querySelector('#street').value);
         console.log("Miasto: " + document.querySelector('#city').value);
         console.log("Kod pocztowy: " + document.querySelector('#zipCode').value);
@@ -185,12 +231,13 @@ document.addEventListener("DOMContentLoaded", function() {
       if(this.currentStep === 5) {
 
         for (var i = 0; i < checkboxes.length; i++) {
-          categories.push(checkboxes[i].value);
+          let categoryName = checkboxes[i].parentNode.children;
+          categories.push(categoryName[2].innerHTML);
         }
 
         document.querySelector("#quantity-result").innerHTML = "Worki: " + document.querySelector('#quantity').value;
         document.querySelector("#category-result").innerHTML = "Z kategorii: " + categories.join(", ");
-        document.querySelector("#institution-result").innerHTML = selectedInstitution.value;
+        document.querySelector("#institution-result").innerHTML = selectedInstitutionName;
         document.querySelector("#street-result").innerHTML = document.querySelector('#street').value;
         document.querySelector("#city-result").innerHTML = document.querySelector('#city').value;
         document.querySelector("#zipCode-result").innerHTML = document.querySelector('#zipCode').value;

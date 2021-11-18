@@ -2,7 +2,6 @@ package pl.coderslab.charity.donation;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.coyote.http11.filters.IdentityInputFilter;
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,30 +22,29 @@ public class DonationController {
     private final IDonationRepository iDonationRepository;
 
     @GetMapping("/form")
-    public String openForm(Model model){
+    public String openForm(Model model) {
         model.addAttribute("donation", new Donation());
         return "form";
     }
 
     @PostMapping("/addDonation")
-    @ResponseBody
-    public String getDonationDetails(@Valid Donation donation, BindingResult result){
-        if(result.hasErrors()){
-//            return "index";
-            return result.toString();
-        } else {
-            iDonationRepository.save(donation);
-            return "form-confirmation";
+    public String getDonationDetails(@Valid Donation donation, BindingResult result) {
+        if (result.hasErrors()) {
+            return "index";
         }
+
+        iDonationRepository.save(donation);
+        return "form-confirmation";
+
     }
 
     @ModelAttribute
-    public void categories(Model model){
+    public void categories(Model model) {
         model.addAttribute("categories", iCategoryRepository.findAll());
     }
 
     @ModelAttribute
-    public void institutions(Model model){
+    public void institutions(Model model) {
         model.addAttribute("institutions", iInstitutionRepository.findAll());
     }
 
