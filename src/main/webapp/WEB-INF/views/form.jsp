@@ -85,7 +85,7 @@
     </div>
 
     <div class="form--steps-container">
-        <div class="form--steps-counter">Krok <span>1</span>/4</div>
+        <div class="form--steps-counter">Krok <span>1</span>/5</div>
 
         <form:form action="/addDonation" method="post" modelAttribute="donation">
             <!-- STEP 1: class .active is switching steps -->
