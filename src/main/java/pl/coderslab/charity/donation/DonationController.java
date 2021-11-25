@@ -1,17 +1,16 @@
 package pl.coderslab.charity.donation;
 
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.http11.filters.IdentityInputFilter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import pl.coderslab.charity.category.Category;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import pl.coderslab.charity.category.ICategoryRepository;
 import pl.coderslab.charity.institution.IInstitutionRepository;
 
 import javax.validation.Valid;
-import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -21,10 +20,10 @@ public class DonationController {
     private final IInstitutionRepository iInstitutionRepository;
     private final IDonationRepository iDonationRepository;
 
-    @GetMapping("/form")
+    @GetMapping("/giveDonation")
     public String openForm(Model model) {
         model.addAttribute("donation", new Donation());
-        return "form";
+        return "giveDonation";
     }
 
     @PostMapping("/addDonation")
@@ -34,8 +33,7 @@ public class DonationController {
         }
 
         iDonationRepository.save(donation);
-        return "form-confirmation";
-
+        return "donation-confirmation";
     }
 
     @ModelAttribute

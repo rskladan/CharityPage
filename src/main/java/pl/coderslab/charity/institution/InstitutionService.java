@@ -9,9 +9,4 @@ import java.util.List;
 @RequiredArgsConstructor
 public class InstitutionService {
 
-    private final IInstitutionRepository iInstitutionRepository;
-
-    public List<Institution> getInstitutions(){
-        return iInstitutionRepository.findAll();
-    }
 }

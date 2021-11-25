@@ -6,10 +6,7 @@ import pl.coderslab.charity.institution.Institution;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.List;
 
 @Entity
@@ -39,7 +36,7 @@ public class Donation {
     @Size(min = 5, max = 6, message = "Wrong zip code")
     private String zipCode;
 
-//    wrocic do LocalDate
+    //    wrocic do LocalDate
     private String pickUpDate;
     private String pickUpTime;
     private String pickUpComment;
